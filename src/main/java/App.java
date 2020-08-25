@@ -21,13 +21,33 @@ public class App {
         try {
             option = input.nextInt();
         } catch (Exception e) {
-            System.out.println("Niepoprawne dane wejsciowe, wprowadz liczbę.");
+            System.out.println("Niepoprawne dane wejściowe, wprowadź liczbę.");
             e.printStackTrace();
         }
         if (option == 1) {
-            System.out.println("Wybrano opcję 1.");
+            System.out.println("Tworzymy nowego gościa.");
+            try {
+                System.out.println("Podaj imię: ");
+                String firstName = input.next();
+                System.out.println("Podaj nazwisko: ");
+                String lastName = input.next();
+                System.out.println("Podaj wiek: ");
+                int age = input.nextInt();
+                Guest createdGuest = new Guest(firstName, lastName, age);
+            } catch (Exception e) {
+                System.out.println("Wiek nierozpoznany, używaj liczb.");
+            }
         } else if (option == 2) {
-            System.out.println("Wybrano opcję 2.");
+            System.out.println("Tworzymy nowy pokój.");
+            try {
+                System.out.println("Numer: ");
+                int number = input.nextInt();
+                System.out.println("Ilość łóżek: ");
+                int beds = input.nextInt();
+                Room createdRoom = new Room(number, beds);
+            } catch (Exception e) {
+                System.out.println("Nierozpoznane dane, użyj liczb.");
+            }
         } else if (option == 3) {
             System.out.println("Wybrano opcję 3.");
         } else {
