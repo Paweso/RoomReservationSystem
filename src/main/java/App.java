@@ -33,10 +33,9 @@ public class App {
             String lastName = input.next();
             System.out.print("Podaj wiek: ");
             int age = input.nextInt();
-            Guest createdGuest = new Guest(firstName, lastName, age);
-            String info = String.format("Stworzono gościa: %s %s (%d)", createdGuest.getFirstName(), createdGuest.getLastName(), createdGuest.getAge());
-            System.out.println(info);
-            return createdGuest;
+            Guest createGuest = new Guest(firstName, lastName, age);
+            System.out.println(createGuest.getInfo());
+            return createGuest;
         } catch (Exception e) {
             System.out.println("Wiek nierozpoznany, używaj liczb.");
             return null;
@@ -50,10 +49,9 @@ public class App {
             int number = input.nextInt();
             System.out.println("Ilość łóżek: ");
             int beds = input.nextInt();
-            Room createdRoom = new Room(number, beds);
-            String info = String.format("Utworzono pokój o numerze %d i (%d)", createdRoom.getNumber(), createdRoom.getBeds());
-            System.out.println(info);
-            return createdRoom;
+            Room createRoom = new Room(number, beds);
+            System.out.println(createRoom.getInfo());
+            return createRoom;
         } catch (Exception e) {
             System.out.println("Nierozpoznane dane, użyj liczb.");
             return null;

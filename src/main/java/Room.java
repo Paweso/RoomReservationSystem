@@ -1,26 +1,16 @@
 public class Room {
 
-    int number;
-    int beds;
+    private int number;
+    private int beds;
 
     public Room(int number, int beds) {
         this.number = number;
         this.beds = beds;
     }
 
-    public int getNumber() {
-        return number;
+    public String getInfo() {
+        return String.format("Utworzono pokój o numerze %d i (%d)", this.number, this.beds);
     }
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
 
-    public int getBeds() {
-        return beds;
-    }
-
-    public void setBeds(int beds) {
-        this.beds = beds;
-    }
 }
