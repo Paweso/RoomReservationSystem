@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class App {
@@ -16,7 +17,7 @@ public class App {
         if (option == 1) {
             Guest guest = readCreateGuest(input);
         } else if (option == 2) {
-            Room room = readCreateRoom(input);
+            Room room = createNewRoom(input);
         } else if (option == 3) {
             System.out.println("Wybrano opcję 3.");
         } else {
@@ -58,7 +59,7 @@ public class App {
         return gender;
     }
 
-    private static Room readCreateRoom(Scanner input) {
+    private static Room createNewRoom(Scanner input) {
         System.out.println("Tworzymy nowy pokój.");
         try {
             System.out.println("Numer: ");
@@ -68,12 +69,11 @@ public class App {
             Room createRoom = new Room(number, bedTypes);
             System.out.println(createRoom.getInfo());
             return createRoom;
-        } catch (Exception e) {
+        } catch (InputMismatchException e) {
             System.out.println("Nierozpoznane dane, użyj liczb.");
             return null;
         }
     }
-
 
     private static BedType[] getBedType(Scanner input) {
         System.out.println("Ile łóżek w pokoju?:");
