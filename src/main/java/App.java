@@ -50,11 +50,12 @@ public class App {
         System.out.println("\t2. Kobieta");
         int number = input.nextInt();
         Gender gender = Gender.MALE;
-        if (number == 1){
+        if (number == 1) {
             gender = Gender.MALE;
-        }else if (number ==2){
+        } else if (number == 2) {
             gender = Gender.FEMALE;
-        } return gender;
+        }
+        return gender;
     }
 
     private static Room readCreateRoom(Scanner input) {
@@ -63,8 +64,8 @@ public class App {
             System.out.println("Numer: ");
             int number = input.nextInt();
 
-            BedType bedType = getBedType(input);
-            Room createRoom = new Room(number, bedType);
+            BedType[] bedTypes = getBedType(input);
+            Room createRoom = new Room(number, bedTypes);
             System.out.println(createRoom.getInfo());
             return createRoom;
         } catch (Exception e) {
@@ -74,22 +75,31 @@ public class App {
     }
 
 
-    private static BedType getBedType(Scanner input) {
-        System.out.println("Typy łóżek: ");
-        System.out.println("\t1. Pojedyncze");
-        System.out.println("\t2. Podwójne");
-        System.out.println("\t3. Królewskie");
-        int beds = input.nextInt();
+    private static BedType[] getBedType(Scanner input) {
+        System.out.println("Ile łóżek w pokoju?:");
+        int bedNumber = input.nextInt();
 
-        BedType bedType = BedType.SINGLE;
-        if (beds == 1) {
-            bedType = BedType.SINGLE;
-        } else if (beds == 2) {
-            bedType = BedType.DOUBLE;
-        } else if (beds == 3) {
-            bedType = BedType.KING_SIZE;
+        BedType[] bedTypes = new BedType[bedNumber];
+
+        for (int i = 0; i < bedNumber; i++) {
+
+            System.out.println("Typy łóżek: ");
+            System.out.println("\t1. Pojedyncze");
+            System.out.println("\t2. Podwójne");
+            System.out.println("\t3. Królewskie");
+            BedType bedType = BedType.SINGLE;
+            int beds = input.nextInt();
+
+            if (beds == 1) {
+                bedType = BedType.SINGLE;
+            } else if (beds == 2) {
+                bedType = BedType.DOUBLE;
+            } else if (beds == 3) {
+                bedType = BedType.KING_SIZE;
+            }
+            bedTypes[i] = bedType;
         }
-        return bedType;
+        return bedTypes;
     }
 
     private static int readOption(Scanner input) {
