@@ -11,7 +11,17 @@ public class App {
         showSystemInformation(hotelName, systemVersion, isDeveloperVersion);
 
         Scanner input = new Scanner(System.in);
+        try {
 
+            performAction(input);
+        } catch (WrongOptionException e) {
+            System.out.println("Wystąpił niespodziewany błąd.");
+            System.out.println("Kod błędu: " + e.getCode());
+            System.out.println("Komunikat błędu: " + e.getMessage());
+        }
+    }
+
+    private static void performAction(Scanner input) {
         int option = readOption(input);
 
         if (option == 1) {
@@ -21,7 +31,7 @@ public class App {
         } else if (option == 3) {
             System.out.println("Wybrano opcję 3.");
         } else {
-            System.out.println("Wybrano niepoprawną akcję.");
+            throw new WrongOptionException("Wrong option in main menu");
         }
     }
 
@@ -55,6 +65,8 @@ public class App {
             gender = Gender.MALE;
         } else if (number == 2) {
             gender = Gender.FEMALE;
+        } else {
+            throw new WrongOptionException("Wrong option in gender selection");
         }
         return gender;
     }
@@ -70,8 +82,7 @@ public class App {
             System.out.println(createRoom.getInfo());
             return createRoom;
         } catch (InputMismatchException e) {
-            System.out.println("Nierozpoznane dane, użyj liczb.");
-            return null;
+            throw new InputMismatchException("Wrong characters used instead of numbers");
         }
     }
 
@@ -96,6 +107,8 @@ public class App {
                 bedType = BedType.DOUBLE;
             } else if (beds == 3) {
                 bedType = BedType.KING_SIZE;
+            } else {
+                throw new WrongOptionException("Wrong option when selecting bed type");
             }
             bedTypes[i] = bedType;
         }
