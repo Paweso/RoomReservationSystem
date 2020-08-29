@@ -14,10 +14,16 @@ public class App {
         try {
 
             performAction(input);
-        } catch (WrongOptionException e) {
+        } catch (WrongOptionException | OnlyNumberException e) {
             System.out.println("Wystąpił niespodziewany błąd.");
             System.out.println("Kod błędu: " + e.getCode());
             System.out.println("Komunikat błędu: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Wystąpił niespodziewany błąd.");
+            System.out.println("Nieznany kod błędu");
+            System.out.println("Komunikat błędu: " + e.getMessage());
+        } finally {
+            System.out.println("Wychodzę z aplikacji");
         }
     }
 
@@ -49,9 +55,8 @@ public class App {
             Guest createGuest = new Guest(firstName, lastName, age, gender);
             System.out.println(createGuest.getInfo());
             return createGuest;
-        } catch (Exception e) {
-            System.out.println("Wiek nierozpoznany, używaj liczb.");
-            return null;
+        } catch (InputMismatchException e) {
+            throw new OnlyNumberException("Use only numbers when choosing gender.");
         }
     }
 
@@ -82,7 +87,7 @@ public class App {
             System.out.println(createRoom.getInfo());
             return createRoom;
         } catch (InputMismatchException e) {
-            throw new InputMismatchException("Wrong characters used instead of numbers");
+            throw new OnlyNumberException("Wrong characters used instead of numbers");
         }
     }
 
@@ -124,9 +129,8 @@ public class App {
         int option = 0;
         try {
             option = input.nextInt();
-        } catch (Exception e) {
-            System.out.println("Niepoprawne dane wejściowe, wprowadź liczbę.");
-            e.printStackTrace();
+        } catch (InputMismatchException e) {
+            throw new OnlyNumberException("Use only numbers in main menu");
         }
         return option;
     }
