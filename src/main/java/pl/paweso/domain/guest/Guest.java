@@ -2,12 +2,12 @@ package pl.paweso.domain.guest;
 
 public class Guest {
 
-    private String firstName;
-    private String lastName;
-    private int age;
-    private Gender gender;
+    private final String firstName;
+    private final String lastName;
+    private final int age;
+    private final Gender gender;
 
-    public Guest(String firstName, String lastName, int age, Gender gender) {
+    Guest(String firstName, String lastName, int age, Gender gender) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.age = age;
@@ -15,6 +15,6 @@ public class Guest {
     }
 
     public String getInfo() {
-        return String.format("Stworzono gościa: %s %s (%d) %s ", this.firstName,this.lastName, this.age, this.gender);
+        return String.format("Stworzono gościa: %s %s (%d) %s ", this.firstName, this.lastName, this.age, this.gender);
     }
 }

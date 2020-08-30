@@ -29,7 +29,11 @@ public class TextUI {
             if (genderOption != 1 && genderOption != 2) {
                 throw new WrongOptionException("Wrong option in gender selection");
             }
-            Guest newGuest = guestService.createNewGuest(firstName, lastName, age, genderOption);
+            boolean isMale = false;
+            if (genderOption == 1) {
+                isMale = true;
+            }
+            Guest newGuest = guestService.createNewGuest(firstName, lastName, age, isMale);
             System.out.println(newGuest.getInfo());
         } catch (InputMismatchException e) {
             throw new OnlyNumberException("Use only numbers when choosing gender");
@@ -94,16 +98,22 @@ public class TextUI {
     }
 
     private void performAction(Scanner input) {
-        int option = readOption(input);
+        int option;
 
-        if (option == 1) {
-            readNewGuestData(input);
-        } else if (option == 2) {
-            readNewRoomData(input);
-        } else if (option == 3) {
-            System.out.println("Wybrano opcję 3.");
-        } else {
-            throw new WrongOptionException("Wrong option in main menu");
+        while (true) {
+            option = readOption(input);
+
+            if (option == 1) {
+                readNewGuestData(input);
+            } else if (option == 2) {
+                readNewRoomData(input);
+            } else if (option == 3) {
+                System.out.println("Wybrano opcję 3.");
+            } else if (option == 0) {
+                break;
+            } else {
+                throw new WrongOptionException("Wrong option in main menu");
+            }
         }
     }
 
@@ -111,6 +121,7 @@ public class TextUI {
         System.out.println("1. Dodaj nowego gościa.");
         System.out.println("2. Dodaj nowy pokój.");
         System.out.println("3. Wyszukaj gościa.");
+        System.out.println("0. Wyjście z aplikacji.");
         System.out.println("Wybierz opcję: ");
 
         int option;
