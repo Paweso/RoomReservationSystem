@@ -8,6 +8,7 @@ import pl.paweso.domain.room.Room;
 import pl.paweso.domain.room.RoomService;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class TextUI {
@@ -34,7 +35,7 @@ public class TextUI {
                 isMale = true;
             }
             Guest newGuest = guestService.createNewGuest(firstName, lastName, age, isMale);
-            System.out.println(newGuest.getInfo());
+            System.out.println("Stworzono gościa: " + newGuest.getInfo());
         } catch (InputMismatchException e) {
             throw new OnlyNumberException("Use only numbers when choosing gender");
         }
@@ -47,7 +48,7 @@ public class TextUI {
             int number = input.nextInt();
             int[] bedTypes = chooseBedType(input);
             Room createRoom = roomService.createNewRoom(number, bedTypes);
-            System.out.println(createRoom.getInfo());
+            System.out.println("Utworzono pokój o numerze " + createRoom.getInfo());
         } catch (InputMismatchException e) {
             throw new OnlyNumberException("Wrong characters used instead of numbers");
         }
@@ -81,6 +82,9 @@ public class TextUI {
     }
 
     public void showMainMenu() {
+        System.out.println("Trwa łądowanie danych...");
+        this.guestService.readAll();
+
         Scanner input = new Scanner(System.in);
         try {
             performAction(input);
@@ -92,15 +96,13 @@ public class TextUI {
             System.out.println("Wystąpił niespodziewany błąd.");
             System.out.println("Nieznany kod błędu");
             System.out.println("Komunikat błędu: " + e.getMessage());
-        } finally {
-            System.out.println("Wychodzę z aplikacji");
         }
     }
 
     private void performAction(Scanner input) {
-        int option;
+        int option = -1;
 
-        while (true) {
+        while (option != 0) {
             option = readOption(input);
 
             if (option == 1) {
@@ -108,19 +110,39 @@ public class TextUI {
             } else if (option == 2) {
                 readNewRoomData(input);
             } else if (option == 3) {
-                System.out.println("Wybrano opcję 3.");
+                showAllGuests();
+            } else if (option == 4) {
+                showAllRooms();
             } else if (option == 0) {
-                break;
+                System.out.println("Wychodzę z aplikacji. Zapisuję dane.");
+                this.guestService.saveAll();
             } else {
                 throw new WrongOptionException("Wrong option in main menu");
             }
         }
     }
 
+    private void showAllRooms() {
+        List<Room> rooms = this.roomService.getAllRooms();
+
+        for (Room room : rooms) {
+            System.out.println(room.getInfo());
+        }
+    }
+
+    private void showAllGuests() {
+        List<Guest> guests = this.guestService.getAllGuests();
+
+        for (Guest guest : guests) {
+            System.out.println(guest.getInfo());
+        }
+    }
+
     private int readOption(Scanner input) {
         System.out.println("1. Dodaj nowego gościa.");
         System.out.println("2. Dodaj nowy pokój.");
-        System.out.println("3. Wyszukaj gościa.");
+        System.out.println("3. Wypisz gości.");
+        System.out.println("4. Wypisz pokoje.");
         System.out.println("0. Wyjście z aplikacji.");
         System.out.println("Wybierz opcję: ");
 

@@ -12,9 +12,9 @@ public class Room {
 
     public String getInfo() {
 
-        StringBuilder bedInfo = new StringBuilder("\nRodzaje łóżek w pokoju.\n");
+        StringBuilder bedInfo = new StringBuilder("Rodzaje łóżek w pokoju.\n");
         for (BedType bedType : bedTypes) bedInfo.append("\t").append(bedType).append("\n");
 
-        return String.format("Utworzono pokój o numerze %d %s", this.number, bedInfo.toString());
+        return String.format("%d %s", this.number, bedInfo.toString());
     }
 }
