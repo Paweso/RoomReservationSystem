@@ -1,3 +1,7 @@
+package pl.paweso.domain.room;
+
+import pl.paweso.exceptions.WrongOptionException;
+
 public class RoomService {
 
     private RoomRepository repository = new RoomRepository();

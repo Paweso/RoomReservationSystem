@@ -1,3 +1,5 @@
+package pl.paweso.domain.guest;
+
 public class Guest {
 
     private String firstName;

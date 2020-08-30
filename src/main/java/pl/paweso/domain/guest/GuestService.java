@@ -1,5 +1,7 @@
+package pl.paweso.domain.guest;
+
 public class GuestService {
-    GuestRepository guestRepository = new GuestRepository();
+    private GuestRepository guestRepository = new GuestRepository();
 
     public Guest createNewGuest(String firstName, String lastName, int age, int genderOption) {
         Gender gender = Gender.MALE;

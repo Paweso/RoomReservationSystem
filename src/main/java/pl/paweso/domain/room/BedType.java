@@ -1,3 +1,5 @@
+package pl.paweso.domain.room;
+
 public enum BedType {
 
     SINGLE,

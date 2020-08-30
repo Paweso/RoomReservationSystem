@@ -1,3 +1,5 @@
+package pl.paweso.exceptions;
+
 public class WrongOptionException extends ReservationCustomException {
 
     private int code = 101;

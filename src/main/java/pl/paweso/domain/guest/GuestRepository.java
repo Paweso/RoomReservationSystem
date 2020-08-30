@@ -1,5 +1,4 @@
-import java.util.InputMismatchException;
-import java.util.Scanner;
+package pl.paweso.domain.guest;
 
 public class GuestRepository {
 

@@ -1,3 +1,5 @@
+package pl.paweso.domain.room;
+
 public class Room {
 
     private int number;
