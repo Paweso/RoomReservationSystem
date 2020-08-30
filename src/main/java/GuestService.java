@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class GuestService {
     GuestRepository guestRepository = new GuestRepository();
 

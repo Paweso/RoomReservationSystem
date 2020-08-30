@@ -30,61 +30,16 @@ public class App {
 
     private static void performAction(Scanner input) {
         int option = readOption(input);
-        GuestService repo = new GuestService();
 
         if (option == 1) {
             textUI.readNewGuestData(input);
         } else if (option == 2) {
-            Room room = createNewRoom(input);
+            textUI.readNewRoomData(input);
         } else if (option == 3) {
             System.out.println("Wybrano opcję 3.");
         } else {
             throw new WrongOptionException("Wrong option in main menu");
         }
-    }
-
-    private static Room createNewRoom(Scanner input) {
-        System.out.println("Tworzymy nowy pokój.");
-        try {
-            System.out.println("Numer: ");
-            int number = input.nextInt();
-
-            BedType[] bedTypes = getBedType(input);
-            Room createRoom = new Room(number, bedTypes);
-            System.out.println(createRoom.getInfo());
-            return createRoom;
-        } catch (InputMismatchException e) {
-            throw new OnlyNumberException("Wrong characters used instead of numbers");
-        }
-    }
-
-    private static BedType[] getBedType(Scanner input) {
-        System.out.println("Ile łóżek w pokoju?:");
-        int bedNumber = input.nextInt();
-
-        BedType[] bedTypes = new BedType[bedNumber];
-
-        for (int i = 0; i < bedNumber; i++) {
-
-            System.out.println("Typy łóżek: ");
-            System.out.println("\t1. Pojedyncze");
-            System.out.println("\t2. Podwójne");
-            System.out.println("\t3. Królewskie");
-            BedType bedType;
-            int beds = input.nextInt();
-
-            if (beds == 1) {
-                bedType = BedType.SINGLE;
-            } else if (beds == 2) {
-                bedType = BedType.DOUBLE;
-            } else if (beds == 3) {
-                bedType = BedType.KING_SIZE;
-            } else {
-                throw new WrongOptionException("Wrong option when selecting bed type");
-            }
-            bedTypes[i] = bedType;
-        }
-        return bedTypes;
     }
 
     private static int readOption(Scanner input) {
