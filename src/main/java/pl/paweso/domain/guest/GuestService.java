@@ -11,7 +11,7 @@ public class GuestService {
         if (isMale) {
             gender = Gender.MALE;
         }
-        return guestRepository.creadNewGuest(firstName, lastName, age, gender);
+        return guestRepository.createNewGuest(firstName, lastName, age, gender);
     }
 
     public List<Guest> getAllGuests() {
